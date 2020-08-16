@@ -38,6 +38,7 @@ class _HomePageState extends State<HomePage> {
   Stock sto;
   String companyData = "null";
 
+
   ProviderTemp providerTemp = ProviderTemp(0);
   List<ChartGraphData> listOfStockData = [];
 
@@ -49,29 +50,60 @@ class _HomePageState extends State<HomePage> {
   List<String> company = ["ASHOKLEY", "BSE (Sensex)", "BSESN", "CIPLA", "EICHERMOT", "NSE (Nifty)", "NSEI", "RELIANCE", "TATASTEEL"];
   var selectedCompIndex = 0;
 
-  bool isLoadedList = false;
-  bool isInit = true;
+ void getData(String comp, DateTime date) async{
+   await provider.getDataFromFirestore("ASHOKLEY", date.toString()).then((value) {
 
-  didChangeDependencies() {
-    if(isInit) {
-      setState(() {
-        isLoadedList = true;
-      });
-    }
-    providerTemp.getListOfStockData("ASHOKLEY", DateTime(2020-08-13)).then((value) {
-      setState(() {
-        isLoadedList = false;
-        listOfStockData = value;
-      });
-      print("fghjikoljhvghbjnkl;kjhvgcf              $value");
+       st = Stock(
+         d,
+         provider.stock.openPrice,
+         provider.stock.closePrice,
+         provider.stock.volume,
+         provider.stock.high,
+         provider.stock.low,
+         provider.stock.adjClose,
+       );
+       rt = Return(
+         provider.returnData.YTD,
+         provider.returnData.oneWeek,
+         provider.returnData.oneMonth,
+         provider.returnData.threeMonth,
+         provider.returnData.sixMonth,
+         provider.returnData.oneYear,
+         provider.returnData.twoYear,
+         provider.returnData.threeMonth,
+       );
+     print(provider.stock.openPrice.toString());
+     print(provider.stock.closePrice.toString());
+     print(provider.stock.high.toString());
+   });
+ }
 
-    });
-    if(listOfStockData.length > 0){
+  var _isinit=true;
+  var _isloading = false;
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    if(_isinit){
       setState(() {
-        isInit =false;
+        _isloading=true;
       });
+      providerTemp.getListOfStockData("ASHOKLEY", d).then((value) {
+        setState(() {
+          _isloading = false;
+          _isinit =false;
+          print("list of stock length ");
+          print(value.length);
+          listOfStockData = value;
+        });
+
+      });
+      if(listOfStockData.length!=0)
+        _isinit=false;
+//      _isinit=false;
     }
+    super.didChangeDependencies();
   }
+
   Future <bool> _onPressedBack(){
     return showDialog(
       context: context,
@@ -90,13 +122,23 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-@override
-  void initState() {
-    didChangeDependencies();
-    super.initState();
-  }
+
   @override
   Widget build(BuildContext context) {
+
+    /*initState(){
+        if(isLoadedList==false)
+        {
+          providerTemp.getListOfStockData("BSESN", d).then((value) {
+            setState(() {
+              listOfStockData = value;
+            });
+          });
+          setState(() {
+            isLoadedList = true;
+          });
+        }
+      }*/
     MediaQueryData data = MediaQuery.of(context);
     final orientation = MediaQuery.of(context).orientation;
     return WillPopScope(
@@ -216,7 +258,7 @@ class _HomePageState extends State<HomePage> {
                 child: ListView(
                   children: [
                     Container(
-                      child:  graphChart(context, listOfStockData, isLoadedList),
+                      child:  graphChart(context, listOfStockData, _isloading),
                     ),
                     Divider(
                       color: Colors.grey,
