@@ -38,7 +38,6 @@ class _HomePageState extends State<HomePage> {
   Stock sto;
   String companyData = "null";
 
-
   ProviderTemp providerTemp = ProviderTemp(0);
   List<ChartGraphData> listOfStockData = [];
 
@@ -50,47 +49,21 @@ class _HomePageState extends State<HomePage> {
   List<String> company = ["ASHOKLEY", "BSE (Sensex)", "BSESN", "CIPLA", "EICHERMOT", "NSE (Nifty)", "NSEI", "RELIANCE", "TATASTEEL"];
   var selectedCompIndex = 0;
 
- void getData(String comp, DateTime date) async{
-   await provider.getDataFromFirestore("ASHOKLEY", date.toString()).then((value) {
-
-       st = Stock(
-         d,
-         provider.stock.openPrice,
-         provider.stock.closePrice,
-         provider.stock.volume,
-         provider.stock.high,
-         provider.stock.low,
-         provider.stock.adjClose,
-       );
-       rt = Return(
-         provider.returnData.YTD,
-         provider.returnData.oneWeek,
-         provider.returnData.oneMonth,
-         provider.returnData.threeMonth,
-         provider.returnData.sixMonth,
-         provider.returnData.oneYear,
-         provider.returnData.twoYear,
-         provider.returnData.threeMonth,
-       );
-     print(provider.stock.openPrice.toString());
-     print(provider.stock.closePrice.toString());
-     print(provider.stock.high.toString());
-   });
- }
-
   bool isLoadedList = false;
   bool isInit = true;
+
   didChangeDependencies() {
     if(isInit) {
       setState(() {
         isLoadedList = true;
       });
     }
-    providerTemp.getListOfStockData("ASHOKLEY", d).then((value) {
+    providerTemp.getListOfStockData("ASHOKLEY", DateTime(2020-08-13)).then((value) {
       setState(() {
         isLoadedList = false;
         listOfStockData = value;
       });
+      print("fghjikoljhvghbjnkl;kjhvgcf              $value");
 
     });
     if(listOfStockData.length > 0){
@@ -98,7 +71,6 @@ class _HomePageState extends State<HomePage> {
         isInit =false;
       });
     }
-
   }
   Future <bool> _onPressedBack(){
     return showDialog(
@@ -118,23 +90,13 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
+@override
+  void initState() {
+    didChangeDependencies();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
-
-    /*initState(){
-        if(isLoadedList==false)
-        {
-          providerTemp.getListOfStockData("BSESN", d).then((value) {
-            setState(() {
-              listOfStockData = value;
-            });
-          });
-          setState(() {
-            isLoadedList = true;
-          });
-        }
-      }*/
     MediaQueryData data = MediaQuery.of(context);
     final orientation = MediaQuery.of(context).orientation;
     return WillPopScope(
