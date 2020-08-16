@@ -37,6 +37,7 @@ List<Color> color = [Colors.red,Colors.purpleAccent,Colors.orangeAccent,Colors.y
   );
   Stock sto;
   String companyData = "null";
+  List<ChartGraphData> tempList = [];
 
   ProviderTemp providerTemp = ProviderTemp(0);
   List<ChartGraphData> listOfStockData = [];
@@ -358,10 +359,14 @@ List<Color> color = [Colors.red,Colors.purpleAccent,Colors.orangeAccent,Colors.y
               print("jbsvh45678987632345678i9o");
                print(provider.returnData.YTD.price.toString());
             });
+            await providerTemp.getListOfStockData(company[index], DateTime.parse("2020-08-13")).then((value) {
+              tempList = value;
+            });
             setState(() {
               index = ind;
               st = sto;
               rt = rtn;
+              listOfStockData = tempList;
             });
         },
         child: Row(
