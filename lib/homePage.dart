@@ -39,35 +39,6 @@ class _HomePageState extends State<HomePage> {
   List<String> company = ["ASHOKLEY", "BSE (Sensex)", "BSESN", "CIPLA", "EICHERMOT", "NSE (Nifty)", "NSEI", "RELIANCE", "TATASTEEL"];
   var selectedCompIndex = 0;
 
-
-// void getData(String comp, DateTime date) async{
-//   await provider.getDataFromFirestore("ASHOKLEY", date.toString()).then((value) {
-
-//       st = Stock(
-//         d,
-//         provider.stock.openPrice,
-//         provider.stock.closePrice,
-//         provider.stock.volume,
-//         provider.stock.high,
-//         provider.stock.low,
-//         provider.stock.adjClose,
-//       );
-//       rt = Return(
-//         provider.returnData.YTD,
-//         provider.returnData.oneWeek,
-//         provider.returnData.oneMonth,
-//         provider.returnData.threeMonth,
-//         provider.returnData.sixMonth,
-//         provider.returnData.oneYear,
-//         provider.returnData.twoYear,
-//         provider.returnData.threeMonth,
-//       );
-//     print(provider.stock.openPrice.toString());
-//     print(provider.stock.closePrice.toString());
-//     print(provider.stock.high.toString());
-//   });
-// }
-
   Future <bool> _onPressedBack(){
     return showDialog(
       context: context,
@@ -119,15 +90,11 @@ class _HomePageState extends State<HomePage> {
                           ),
                           IconButton(
                             icon: Icon(Icons.search, color: Colors.white,),
-                            onPressed: (){
-
-                            },
+                            onPressed: (){},
                           ),
                           IconButton(
                             icon: Icon(Icons.account_circle, color: Colors.white,),
-                            onPressed: (){
-
-                            },
+                            onPressed: (){},
                           )
                         ],
                       ),

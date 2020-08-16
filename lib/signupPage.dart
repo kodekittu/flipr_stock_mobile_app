@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flipr_stock_app/signinPage.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wave/config.dart';
@@ -145,10 +146,6 @@ class _SignupPageState extends State<SignupPage> {
                            }else{
                              showToast("Password is wrong");
                            }
-                      //    Navigator.pushAndRemoveUntil(
-                      //        context,
-                      //        MaterialPageRoute(builder: (BuildContext context) => HomePage()),
-                      //            (Route<dynamic> route) => false);
                          }else{
                            showToast("Please fill all details");
                          }
@@ -210,7 +207,7 @@ class _SignupPageState extends State<SignupPage> {
         pref.setBool("logedin", true);
         await Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (BuildContext context) => HomePage()),
+            MaterialPageRoute(builder: (BuildContext context) => SigninPage()),
                 (Route<dynamic> route) => false);
       }else{
         showToast("User Already Exist");
