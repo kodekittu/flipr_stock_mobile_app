@@ -91,6 +91,7 @@ class _SigninPageState extends State<SigninPage> {
                       child: TextField(
                         controller: passwordController,
                         style: TextStyle(color: Colors.black),
+                        obscureText: true,
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.lock, color: Colors.black26,),
                           hintText: "Password",

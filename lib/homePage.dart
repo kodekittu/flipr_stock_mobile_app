@@ -24,7 +24,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
     int index =0;
-
+List<Color> color = [Colors.red,Colors.purpleAccent,Colors.orangeAccent,Colors.yellowAccent,Colors.green,Colors.red,Colors.blue,Colors.red,Colors.white,];
   DateTime d = DateTime.now();
   ProviderTemp provider = ProviderTemp(0);
   Stock st =  Stock(DateTime.now(), 38456.64, 61.09, 245006352, 62.0, 52.29,61.09);
@@ -37,7 +37,6 @@ class _HomePageState extends State<HomePage> {
   );
   Stock sto;
   String companyData = "null";
-
 
   ProviderTemp providerTemp = ProviderTemp(0);
   List<ChartGraphData> listOfStockData = [];
@@ -258,7 +257,7 @@ class _HomePageState extends State<HomePage> {
                 child: ListView(
                   children: [
                     Container(
-                      child: _isloading? CircularProgressIndicator(backgroundColor: Colors.blueAccent,) : graphChart(context, listOfStockData),
+                      child: _isloading? CircularProgressIndicator(backgroundColor: Colors.blueAccent,) : graphChart(context, listOfStockData, color[index]),
                     ),
                     Divider(
                       color: Colors.grey,

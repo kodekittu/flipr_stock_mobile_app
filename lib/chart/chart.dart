@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-Widget graphChart(context, List<ChartGraphData> chartGraphData) {
+Widget graphChart(context, List<ChartGraphData> chartGraphData, Color color) {
   double maxm =  chartGraphData.elementAt(0).value;
   double minm = maxm;
   chartGraphData.forEach((element) {
@@ -35,7 +35,7 @@ Widget graphChart(context, List<ChartGraphData> chartGraphData) {
                 axisLine: AxisLine(width: 1),
                 labelFormat: '{value}',
                 majorTickLines: MajorTickLines(size: 0)),
-            series: getMultiColoredLineSeries(chartGraphData),
+            series: getMultiColoredLineSeries(chartGraphData, color),
             trackballBehavior: TrackballBehavior(
                 enable: true,lineColor: Colors.lightBlueAccent,
                 activationMode: ActivationMode.singleTap,
@@ -47,10 +47,10 @@ Widget graphChart(context, List<ChartGraphData> chartGraphData) {
     );
   }
 
-  List<LineSeries<_ChartData, DateTime>> getMultiColoredLineSeries(List<ChartGraphData> chartGraphData) {
+  List<LineSeries<_ChartData, DateTime>> getMultiColoredLineSeries(List<ChartGraphData> chartGraphData, Color color) {
     List<_ChartData> newList = [];
     chartGraphData.forEach((element) {
-      newList.add(_ChartData(element.dateTime, element.value, Colors.red));
+      newList.add(_ChartData(element.dateTime, element.value, color));
     });
     return <LineSeries<_ChartData, DateTime>>[
       LineSeries<_ChartData, DateTime>(

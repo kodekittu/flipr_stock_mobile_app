@@ -94,6 +94,7 @@ class _SignupPageState extends State<SignupPage> {
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(40))),
                       child: TextField(
                         controller: passwordController,
+                        obscureText: true,
                         style: TextStyle(color: Colors.black),
                         decoration: InputDecoration(
                             prefixIcon: Icon(Icons.lock, color: Colors.black26,),
@@ -116,6 +117,7 @@ class _SignupPageState extends State<SignupPage> {
                       child: TextField(
                         controller: confirmPasswordController,
                         style: TextStyle(color: Colors.black),
+                        obscureText: true,
                         decoration: InputDecoration(
                             prefixIcon: Icon(Icons.lock_open, color: Colors.black26,),
                             hintText: "Confirm Password",
