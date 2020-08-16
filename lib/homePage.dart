@@ -23,7 +23,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
+    int index =0;
 
   DateTime d = DateTime.now();
   ProviderTemp provider = ProviderTemp(0);
@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
   var selectedCompIndex = 0;
 
  void getData(String comp, DateTime date) async{
-   await provider.getDataFromFirestore("ASHOKLEY", date.toString()).then((value) {
+   await provider.getDataFromFirestore(company[index], date.toString()).then((value) {
 
        st = Stock(
          d,
@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         _isloading=true;
       });
-      providerTemp.getListOfStockData("ASHOKLEY", d).then((value) {
+      providerTemp.getListOfStockData(company[index], d).then((value) {
         setState(() {
           _isloading = false;
           _isinit =false;
@@ -331,12 +331,12 @@ class _HomePageState extends State<HomePage> {
     ProviderTemp provider = ProviderTemp(0);
     return
       PopupMenuButton(
-        onSelected: (index)
+        onSelected: (ind)
           async{
             setState(() {
-              selectedCompIndex = index;
+              selectedCompIndex = ind;
             });
-            await provider.getDataFromFirestore(company[index], "2020-08-13").then((value){
+            await provider.getDataFromFirestore(company[ind], "2020-08-13").then((value){
                sto = Stock(
                 d,
                 provider.stock.openPrice != null ? double.parse((provider.stock.openPrice).toStringAsFixed(2)) : "null",
@@ -360,6 +360,7 @@ class _HomePageState extends State<HomePage> {
                print(provider.returnData.YTD.price.toString());
             });
             setState(() {
+              index = ind;
               st = sto;
               rt = rtn;
             });
