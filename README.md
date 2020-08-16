@@ -1,10 +1,21 @@
 # flipr_stock_app
 
-A new Flutter application.
+Flipr MOBILE APPLICATION TASK 
+
+##STOCK APP
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Fork this repository.
+
+Clone the forked repository.
+
+For Android studio users.
+Checkout project using VCS and pass forked repo link.
+
+After setting up project in your android studio use run command
+
+This will install the flippr stock app in your device.
 
 A few resources to get you started if this is your first Flutter project:
 
