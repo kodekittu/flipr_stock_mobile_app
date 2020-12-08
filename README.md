@@ -1,10 +1,10 @@
 # flipr_stock_app
 
-Flipr MOBILE APPLICATION TASK 
+Flipr MOBILE APPLICATION  
 
-##STOCK APP
+## STOCK APP
 
-![](assets/logo.png)
+![](assets/images/logo.png)
 
 
 # Getting Started
