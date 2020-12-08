@@ -6,7 +6,6 @@ Flipr MOBILE APPLICATION TASK
 
 ![](assets/logo.png)
 
-![](assets/firstpg.jpeg)
 
 # Getting Started
 
